@@ -2,6 +2,23 @@ import Users from "../../model/Users.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+const generateJWt = (data) => {
+  console.log(data, "<<<<datasss");
+  const token = jwt.sign(
+    {
+      ...data,
+    },
+    process.env.JWT_SECRET_KEY,
+    { expiresIn: "1h" }
+  );
+  return token;
+};
+const saltRounds = 10;
+const getHashPass = async (pass) => {
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hash = await bcrypt.hash(pass, salt);
+  return hash;
+};
 export const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -44,6 +61,47 @@ export const login = async (req, res) => {
     });
   } catch (e) {
     return res.status(400).json({ message: e.message });
+  }
+};
+
+//Post Method
+export const register = async (req, res) => {
+  // const id = uuid.v4();
+
+  const token = await generateJWt({
+    email: req.body.email,
+    role: req.body.role,
+  });
+
+  const data = new Users({
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    email: req.body.email,
+    password: await getHashPass(req.body.password),
+    // password: req.body.password,
+    role: req.body.role,
+    jwtToken: token,
+    // emailVerified: false,
+    phone: req.body.phone,
+    wishlist: req.body.wishlist,
+  });
+
+  try {
+    const dataToSave = await data.save().then((result) => {
+      res.status(200).send({ success: true, data: result });
+    });
+
+    // sendMail(dataToSave.email);
+  } catch (error) {
+    // console.log(error);
+    if (error.message.match("email_1 dup key")) {
+      res.status(400).send({
+        success: false,
+        message: "Already have an account from this email",
+      });
+    } else {
+      res.status(400).json({ message: error.message });
+    }
   }
 };
 

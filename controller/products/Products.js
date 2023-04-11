@@ -80,6 +80,8 @@ const ShowProductsPerCategory = async (category, products) => {
 export const PostProducts = async (req, res) => {
   const product = req.body;
   const newProduct = new Products(product);
+  console.log(newProduct);
+  console.log(newProduct);
   try {
     await newProduct.save();
     res.status(201).send(newProduct);
@@ -89,6 +91,7 @@ export const PostProducts = async (req, res) => {
 };
 
 export const ProductsRecommendations = async (req, res) => {
+  console.log(res);
   try {
     // get 2 different random categories from the database
     let categories = await Products.aggregate([
