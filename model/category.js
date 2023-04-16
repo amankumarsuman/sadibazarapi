@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const {Schema} = mongoose;
 
 const categorySchema = new Schema({
-    _id: mongoose.Schema.Types.ObjectId,
+    
     name: String,
     
     image:
