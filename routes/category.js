@@ -1,5 +1,5 @@
 import express from "express";
-import { addCategory, getCategory } from "../controller/category/Category.js";
+import { addCategory, getCategory } from "../controller/category/category.js";
 
 
 
