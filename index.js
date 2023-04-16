@@ -7,6 +7,7 @@ import products from "./routes/products.js";
 import shipping from "./routes/shipping.js";
 import orders from "./routes/orders.js";
 import payments from "./routes/payments.js";
+import category from "./routes/category.js";
 import notifications from "./routes/notifications.js";
 import sgMail from "@sendgrid/mail";
 import me from "./routes/me.js";
@@ -28,6 +29,7 @@ app.use("/products", products);
 app.use("/shipping", shipping);
 app.use("/notifications", notifications);
 app.use("/me", me);
+app.use("/categorylists", category);
 
 app.get("/", (req, res) => {
   res.status(200).json({
