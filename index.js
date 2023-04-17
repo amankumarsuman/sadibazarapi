@@ -7,10 +7,12 @@ import products from "./routes/products.js";
 import shipping from "./routes/shipping.js";
 import orders from "./routes/orders.js";
 import payments from "./routes/payments.js";
+// import payments from "./routes/paytemPayment.js";
 import notifications from "./routes/notifications.js";
 import sgMail from "@sendgrid/mail";
 import me from "./routes/me.js";
 import Stripe from "stripe";
+// const payments = require("./routes/paytemPayment.js");
 
 const app = express();
 dotenv.config();
@@ -23,10 +25,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/orders", orders);
+// app.use("/payments", payments);
 app.use("/payments", payments);
 app.use("/products", products);
 app.use("/shipping", shipping);
 app.use("/notifications", notifications);
+// app.use("/categories", categories);
 app.use("/me", me);
 
 app.get("/", (req, res) => {
