@@ -7,11 +7,7 @@ import products from "./routes/products.js";
 import shipping from "./routes/shipping.js";
 import orders from "./routes/orders.js";
 import payments from "./routes/payments.js";
-<<<<<<< HEAD
-// import payments from "./routes/paytemPayment.js";
-=======
 import category from "./routes/category.js";
->>>>>>> e0a3a0f0779e5e8f36199fbe2bec591d1b646cd6
 import notifications from "./routes/notifications.js";
 import sgMail from "@sendgrid/mail";
 import me from "./routes/me.js";
