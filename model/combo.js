@@ -10,7 +10,7 @@ const ComboProductSchema = new Schema({
     },
   ],
   specialPrice: { type: Number, required: true },
-  category: { type: String, default: "Combo" },
+  category: { type: String, default: "combo" },
 });
 
 const ComboProduct = mongoose.model("ComboProduct", ComboProductSchema);
