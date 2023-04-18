@@ -91,13 +91,14 @@ export const PostProducts = async (req, res) => {
 };
 
 export const ProductsRecommendations = async (req, res) => {
-  console.log(res);
+  // console.log(res);
   try {
     // get 2 different random categories from the database
     let categories = await Products.aggregate([
       { $sample: { size: 2 } },
       { $project: { category: 1, _id: 0 } },
     ]);
+
     // if the categories are the same, get another two
     while (categories[0].category === categories[1].category) {
       categories = await Products.aggregate([
@@ -111,14 +112,14 @@ export const ProductsRecommendations = async (req, res) => {
     let productscategory1 = await Products.aggregate([
       { $match: { category: categories[0].category } },
       { $sample: { size: 5 } },
-      { $match: { stock: { $gt: 0 } } },
+      { $match: { availabe: { $gt: 0 } } },
     ]);
 
     // get the second category products
     let productscategory2 = await Products.aggregate([
       { $match: { category: categories[1].category } },
       { $sample: { size: 5 } },
-      { $match: { stock: { $gt: 0 } } },
+      { $match: { availabe: { $gt: 0 } } },
     ]);
 
     products.push({
