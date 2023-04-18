@@ -112,14 +112,14 @@ export const ProductsRecommendations = async (req, res) => {
     let productscategory1 = await Products.aggregate([
       { $match: { category: categories[0].category } },
       { $sample: { size: 5 } },
-      { $match: { availabe: { $gt: 0 } } },
+      { $match: { availabe: true } },
     ]);
 
     // get the second category products
     let productscategory2 = await Products.aggregate([
       { $match: { category: categories[1].category } },
       { $sample: { size: 5 } },
-      { $match: { availabe: { $gt: 0 } } },
+      { $match: { availabe: true } },
     ]);
 
     products.push({
