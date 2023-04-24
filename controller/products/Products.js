@@ -165,7 +165,7 @@ export const validateCart = async (req, res) => {
     for (const cartProduct of cart) {
       // get the product from database by id
       const product = await Products.findOne({
-        product_id: cartProduct?._id,
+        product_id: cartProduct.product_id,
       });
 
       // 404 - the product doesn't exist in the database
@@ -183,7 +183,7 @@ export const validateCart = async (req, res) => {
         });
 
       // 400 - product stock is not enough for purchase
-      // if (product.availabe < cartProduct.quantity)
+      // if (product.stock < cartProduct.quantity)
       //   return res.status(400).json({
       //     message: `Not enough stock for ${product.name} to complete the purchase. Requested items: ${cartProduct.quantity}`,
       //     product_id: product.product_id,
@@ -194,7 +194,7 @@ export const validateCart = async (req, res) => {
 
       // add products data to the `products` array
       products.push({
-        product_id: product._id,
+        product_id: product.product_id,
         name: product.name,
         price: product.price,
         quantity: cartProduct.quantity,
