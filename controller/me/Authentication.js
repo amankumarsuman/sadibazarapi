@@ -83,7 +83,7 @@ export const register = async (req, res) => {
     jwtToken: token,
     // emailVerified: false,
     phone: req.body.phone,
-    wishlist: req.body.wishlist,
+    wishlist: req.body?.wishlist,
   });
 
   try {
