@@ -38,6 +38,18 @@ export const partnerwithus = async (req, res) => {
   }
 };
 export const sendOrder = async (req, res) => {
+  const productsHtml = data?.products
+    ?.map(
+      (el) => `
+  <div>
+    <img src="${el.image}" />
+    <h1>Name: ${el.name}</h1>
+    <p>${el.price}</p>
+    <h1>Quantity: ${el.quantity}</h1>
+  </div>
+`
+    )
+    .join("");
   try {
     const { data } = req.body;
 
@@ -61,18 +73,9 @@ export const sendOrder = async (req, res) => {
         <p>Address: ${data?.address}</p>
         <p>Mobile: ${data?.phone_number}</p>
         <p>OrderId: ${data?.order_id}</p>
-       ${data?.products?.map((el) => (
-         <>
-           <img src={el?.image} />
-           <h1>
-             Name:-
-             {el?.name}
-           </h1>
-           {el?.price}
-           <h1>Quantity{el?.quantity}</h1>
-         </>
-       ))}
-      `,
+       <p>Products:</p>
+    ${productsHtml}
+       `,
     };
 
     await transporter.sendMail(mailOptions);
