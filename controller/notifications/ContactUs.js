@@ -44,8 +44,8 @@ export const sendOrder = async (req, res) => {
     ?.map(
       (el) => `
   <div>
-    <img src="${el.image}" />
-    <h1>Name: ${el.name}</h1>
+    <img src=${el.image} />
+    <h6>Products: ${el.name}</h6>
     <p>${el.price}</p>
     <h1>Quantity: ${el.quantity}</h1>
   </div>
@@ -70,11 +70,23 @@ export const sendOrder = async (req, res) => {
       html: `
         <h2>Order Details</h2>
         <p>Name: ${data?.name?.first} ${data?.name?.last}</p>
-        <p>Address: ${data?.address}</p>
+        <h4>Address:</h4>
+        <p>Building No:${data?.address?.building_number}</p>
+        <p>Floor No:${data?.address?.floor}</p>
+        <p>Street No:${data?.address?.street}</p>
+        <p>Building No:${data?.address?.building}</p>
+<p>City:${data?.address?.city}</p>
+<p>Area:${data?.address?.area}</p>
+<p>Country:${data?.address?.country}</p>
+
         <p>Mobile: ${data?.phone_number}</p>
-        <p>OrderId: ${data?.order_id}</p>
+        <p>OrderId: ${data?.orderId}</p>
        <p>Products:</p>
     ${productsHtml}
+    <br/>
+    <hr/>
+    <h2>Sadibazar Team</h2>
+    <img src="https://sadibazar.tech/static/media/sbazarlogo.711e7e55325cf74a5436.png"/>
        `,
     };
 
