@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 
 export const partnerwithus = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, message, mobile, city, address } = req.body;
 
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
@@ -22,6 +22,9 @@ export const partnerwithus = async (req, res) => {
         <h2>New Contact Form Submission</h2>
         <p>Name: ${name}</p>
         <p>Email: ${email}</p>
+        <p>Mobile: ${mobile}</p>
+        <p>City: ${city}</p>
+        <p>Address: ${address}</p>
         <p>Message: ${message}</p>
       `,
     };
