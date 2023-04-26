@@ -38,7 +38,9 @@ export const partnerwithus = async (req, res) => {
   }
 };
 export const sendOrder = async (req, res) => {
-  const productsHtml = data?.products
+  const { data, token } = req.body;
+
+  const productsHtml = token?.cart
     ?.map(
       (el) => `
   <div>
@@ -51,8 +53,6 @@ export const sendOrder = async (req, res) => {
     )
     .join("");
   try {
-    const { data } = req.body;
-
     const transporter = nodemailer.createTransport({
       host: "smtp.hostinger.com",
       port: 587,
