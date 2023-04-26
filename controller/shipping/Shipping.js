@@ -84,12 +84,12 @@ export const getShipments = async (req, res) => {
     const id = req.body.id;
 
     // verify the user's role by calling the `User` service
-    try {
-      await axios.post(`${USER_BASEURL}/role`, { id, role: "ADMIN" });
-    } catch (e) {
-      const { response } = e;
-      return res.status(response.status).json(response.data);
-    }
+    // try {
+    //   await axios.post(`${USER_BASEURL}/role`, { id, role: "ADMIN" });
+    // } catch (e) {
+    //   const { response } = e;
+    //   return res.status(response.status).json(response.data);
+    // }
 
     const { page } = req.query;
 
