@@ -80,8 +80,7 @@ const ShowProductsPerCategory = async (category, products) => {
 export const PostProducts = async (req, res) => {
   const product = req.body;
   const newProduct = new Products(product);
-  console.log(newProduct);
-  console.log(newProduct);
+
   try {
     await newProduct.save();
     res.status(201).send(newProduct);
